@@ -27,9 +27,6 @@ would consider pushing all sub paths onto a LifoQueue until there were no more
 to process, and then process the stack top down.  LifoQueue would be ideal for
 a multithreaded approach as its operations are threadsafe.
 
-If you needed to check to see if the directory structure was too large in
-advance you might consider
-
 Avoids hidden files.
 
 Prints output to stdout.
