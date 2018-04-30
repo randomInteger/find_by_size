@@ -9,4 +9,6 @@ You can specify units of KB, MB, or GB.
 $./walk.py ~/src 1 100000 MB
 
 # future improvements
-better error reporting would be more friendly.
+* better error reporting would be more friendly.
+* For tooling, you would want to output in a standard format like JSON if you
+don't mind that json is byte wasteful.
