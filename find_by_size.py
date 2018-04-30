@@ -62,7 +62,8 @@ def rec_walk(start, min_size, max_size):
             if file_size < max_size and file_size > min_size:
                 print("FOUND: ")
                 print(path, end="\t")
-                print("SIZE: ", file_size)
+                print("SIZE: ", file_size, end=" ")
+                print("bytes")
         else:
             rec_walk(path, min_size, max_size)
 
