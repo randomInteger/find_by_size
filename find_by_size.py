@@ -3,8 +3,8 @@
 """
 find_by_size.py
 
-A python3 way to walk your home subdirs searching for all files that are within
-a certain specified size window in bytes.
+Python3 code that recursively walks a starting path's sub-paths and prints every
+file that is within the size window.
 
 Ignores:  Hidden files that start with "." and symlinks
 
@@ -12,21 +12,20 @@ Done recursively, without using os.walk for academic purposes.
 
 Note:  Recursion is a fun exercise until you blow up the stack.  Consider an
 iterative solution anytime the data set can be large enough to threaten this
-problem.
+problem. (i.e. Use a Queue (think bfs...))
 
 Why not use os.walk()?
 
 The problem with os.walk is that it makes O(2N) stat() system calls on just
-about every path or file object and that is not performant.
+about every path or file object and that is not ideally performant.
 
 Python 3.5+ has scandir which is optimized versus os.walk makes O(n) system
 calls, so that would probably be the most direct solution to this problem.
 
 If you wanted (for example) a bottom up walk without os.walk(topdown=False) you
-would consider pushing all sub paths onto a stack until there were no more to
-process, and then process the stack top down.  (stack = a list just using append
-and pop) If you wanted to do this with multiple threads, you could use a Queue.
-LifoQueue(maxsize=<sane_value_goes_here>) as that object is thread safe.
+would consider pushing all sub paths onto a LifoQueue until there were no more
+to process, and then process the stack top down.  LifoQueue would be ideal for
+a multithreaded approach as its operations are threadsafe.
 
 If you needed to check to see if the directory structure was too large in
 advance you might consider
