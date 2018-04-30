@@ -3,6 +3,11 @@ Python3 code that recursively walks a starting path's sub-paths and prints every
 
 Ignores:  Hidden files that start with "." and links.
 
+Why avoid links? - Symlinks can result in loops in the directory structure which either need to be detected
+or avoided.  If you do neither, you will loop forever until you end up hitting the 4096 linux default file path length and then raise an exception.
+
+If you wanted to solve that problem:  DFS with a lookup of visited vertices.
+
 # usage
 example.  Find all files under ~/src and all of the sub-paths of ~/src between 1 and 100 GB.
 
