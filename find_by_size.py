@@ -6,6 +6,8 @@ find_by_size.py
 A python3 way to walk your home subdirs searching for all files that are within
 a certain specified size window in bytes.
 
+Ignores:  Hidden files that start with "." and symlinks
+
 Done recursively, without using os.walk for academic purposes.
 
 Note:  Recursion is a fun exercise until you blow up the stack.  Consider an
@@ -36,6 +38,7 @@ Prints output to stdout.
 Raises:  Any exception raised while trying to read files/dirs will be raised
 directly.
 
+
 Author:  c.gleeson 2018
 """
 
@@ -43,31 +46,43 @@ import os
 import sys
 
 def get_args():
-    if len(sys.argv) < 3:
-        print("Args needed:  start_path file_min_bytes file_max_bytes")
+    if len(sys.argv) < 4:
+        print("Args needed:  start_path file_size_min file_size_max ['KB','MB','GB']")
         sys.exit(1)
     start = sys.argv[1]
     min_size = int(sys.argv[2])
     max_size = int(sys.argv[3])
-    return (start, min_size, max_size)
+    unit = sys.argv[4]
+    return (start, min_size, max_size, unit)
 
 #the long way around without using os.walk()
-def rec_walk(start, min_size, max_size):
+def rec_walk(start, min_size, max_size, unit):
     for child in os.listdir(start):
+        #Lets omit hidden files/paths that start with "."
         if child.startswith('.'):
             continue
+        #Lets also omit any symlinks, as in certain cases following those
+        #can result in endless traversal loops
         path = os.path.join(start, child)
+        if os.path.islink(path):
+            continue
+        #If we find a file...
         if not os.path.isdir(path):
             file_size = os.stat(path).st_size
+            if unit == 'MB':
+                file_size = file_size / (1024 * 1024)
+            elif unit == 'GB':
+                file_size = file_size / (1024 * 1024 * 1024)
             if file_size < max_size and file_size > min_size:
                 print("FOUND: ")
                 print(path, end="\t")
                 print("SIZE: ", file_size, end=" ")
-                print("bytes")
+                print(unit)
+        #Recurse on the sub-directory
         else:
-            rec_walk(path, min_size, max_size)
+            rec_walk(path, min_size, max_size, unit)
 
 if __name__ == "__main__":
-    (start, min_size, max_size) = get_args()
+    (start, min_size, max_size, unit) = get_args()
 
-    rec_walk(start, min_size, max_size)
+    rec_walk(start, min_size, max_size, unit)
