@@ -4,13 +4,13 @@ Python3 code that recursively walks a starting path's sub-paths and prints every
 # usage
 example.  Find all files under ~/src and all of the sub-paths of ~/src between 1 and 100 GB.
 
-You can specify units of KB, MB, or GB.\
+You can specify units of KB, MB, or GB.
 
-$./walk.py ~/src 1 100000 MB\
+$./walk.py ~/src 1 100000 MB
 
-$./walk.py ~/src 5 50 GB\
+$./walk.py ~/src 5 50 GB
 
-$./walk.py ~/src 1 1023 KB\
+$./walk.py ~/src 1 1023 KB
 
 # future improvements
 * better error reporting would be more friendly.
