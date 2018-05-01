@@ -25,6 +25,8 @@ just like os.walk() does.
 
 Python 3.5+ has scandir which is optimized versus os.walk makes O(n) system
 calls, so that would probably be the most performant solution to this problem.
+https://www.python.org/dev/peps/pep-0471/
+
 
 # usage
 example.  Find all files under ~/src and all of the sub-paths of ~/src between 1 and 100 GB.
