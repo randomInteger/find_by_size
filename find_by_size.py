@@ -19,13 +19,11 @@ Why not use os.walk()?
 The problem with os.walk is that it makes O(2N) system calls on just
 about every path or file object and that is not ideally performant.
 
-Python 3.5+ has scandir which is optimized versus os.walk makes O(n) system
-calls, so that would probably be the most direct solution to this problem.
+This solution is also not highly performant, because it relies on calling stat()
+just like os.walk() does.  It is shown here for academic purposes.
 
-If you wanted (for example) a bottom up walk without os.walk(topdown=False) you
-would consider pushing all sub paths onto a LifoQueue until there were no more
-to process, and then process the stack top down.  LifoQueue would be ideal for
-a multithreaded approach as its operations are threadsafe.
+Python 3.5+ has scandir which is optimized versus os.walk makes O(n) system
+calls, so that would probably be the most performant solution to this problem.
 
 Avoids hidden files.
 
