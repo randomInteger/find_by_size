@@ -16,7 +16,7 @@ problem. (i.e. Use a Queue (think bfs...))
 
 Why not use os.walk()?
 
-The problem with os.walk is that it makes O(2N) stat() system calls on just
+The problem with os.walk is that it makes O(2N) system calls on just
 about every path or file object and that is not ideally performant.
 
 Python 3.5+ has scandir which is optimized versus os.walk makes O(n) system
