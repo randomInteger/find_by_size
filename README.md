@@ -13,11 +13,11 @@ example.  Find all files under ~/src and all of the sub-paths of ~/src between 1
 
 You can specify units of KB, MB, or GB.
 
-$./walk.py ~/src 1 100000 MB
+$./find_by_size.py ~/src 1 100000 MB
 
-$./walk.py ~/src 5 50 GB
+$./find_by_size.py ~/src 5 50 GB
 
-$./walk.py ~/src 1 1023 KB
+$./find_by_size.py ~/src 1 1023 KB
 
 # future improvements
 * better error reporting would be more friendly.
